@@ -9,3 +9,5 @@ TODO:
 * Menus
 * Pages
 * Error Pages
+* Tests
+* Documentation
