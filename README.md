@@ -4,8 +4,7 @@ A simple cms that uses react, redux, firebase, and the ORY editor to create webs
 
 TODO:
 * Handle error messages throughout registration and login
-* Route to CMS when logged in
-* Router
+* fill out CMS a bit more
 * Layouts
 * Menus
 * Pages
