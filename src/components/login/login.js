@@ -13,6 +13,7 @@ class Login extends Component {
 
     this.loginWithFacebook = this.loginWithFacebook.bind(this);
     this.loginWithGoogle = this.loginWithGoogle.bind(this);
+    this.loginWithTwitter = this.loginWithTwitter.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -30,6 +31,15 @@ class Login extends Component {
 
     firebase.login({
       provider: 'facebook',
+      type: 'popup'
+    });
+  }
+
+  loginWithTwitter() {
+    const { firebase } = this.props;
+
+    firebase.login({
+      provider: 'twitter',
       type: 'popup'
     });
   }
@@ -66,9 +76,14 @@ class Login extends Component {
         <GoogleButton onClick={() => {
           this.loginWithGoogle();
         }} />
-        <img src='https://scontent-lhr3-1.xx.fbcdn.net/v/t39.2365-6/17639236_1785253958471956_282550797298827264_n.png?oh=d35ce789e109b25a89cd6803cbc30c7f&oe=59EBCBEA'
+        <img alt="Login with Facebook" src='/login-facebook.png'
              onClick={() => {
                this.loginWithFacebook();
+             }}
+        />
+        <img alt="Login with Twitter" src='/login-twitter.png'
+             onClick={() => {
+               this.loginWithTwitter();
              }}
         />
       </div>
