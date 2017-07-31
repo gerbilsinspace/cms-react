@@ -1,4 +1,4 @@
-import './protectedRoute.css';
+import './redirectIfLoggedIn.css';
 import React from 'react';
 import { connect } from 'react-redux';
 import {
@@ -6,13 +6,13 @@ import {
   Redirect
 } from 'react-router-dom';
 
-const ProtectedRoute = ({ component: Component, ...rest }) => (
+const RedirectIfLoggedIn = ({ component: Component, ...rest }) => (
   <Route {...rest} render={props => (
-    !rest.profile.isEmpty ? (
+    rest.profile.isEmpty ? (
       <Component {...props}/>
     ) : (
       <Redirect to={{
-        pathname: '/login',
+        pathname: '/cms',
         state: { from: props.location }
       }}/>
     )
@@ -23,5 +23,4 @@ const mapStateToProps = (state) => ({
   profile: state.firebase.profile
 });
 
-export default connect(mapStateToProps)(ProtectedRoute);
-
+export default connect(mapStateToProps)(RedirectIfLoggedIn);

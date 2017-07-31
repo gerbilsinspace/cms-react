@@ -8,6 +8,7 @@ import Error404 from '../views/error404/error404';
 import CMS from '../views/cms/cms';
 
 import ProtectedRoute from '../components/protectedRoute/protectedRoute';
+import RedirectIfLoggedIn from '../components/redirectIfLoggedIn/redirectIfLoggedIn';
 
 class Routing extends Component {
   render() {
@@ -15,9 +16,9 @@ class Routing extends Component {
       <Router>
           <div className="app">
             <Switch>
-              <Route path="/login" component={Login} />
-              <Route path="/logout" component={Logout} />
-              <Route path='/register' component={Register} />
+              <RedirectIfLoggedIn path="/login" component={Login} />
+              <ProtectedRoute path="/logout" component={Logout} />
+              <RedirectIfLoggedIn path='/register' component={Register} />
               <ProtectedRoute path='/cms' component={CMS} />
               <Route component={Error404} />
             </Switch>
