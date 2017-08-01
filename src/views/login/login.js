@@ -15,6 +15,10 @@ class Login extends Component {
     this.loginWithGoogle = this.loginWithGoogle.bind(this);
     this.loginWithTwitter = this.loginWithTwitter.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+
+    this.state = {
+      error: ''
+    }
   }
 
   loginWithGoogle() {
@@ -23,8 +27,10 @@ class Login extends Component {
     firebase.login({
       provider: 'google',
       type: 'popup'
+    }).catch(error => {
+      this.setState({ error: error.message });
     });
-  }i
+  }
 
   loginWithFacebook() {
     const { firebase } = this.props;
@@ -32,6 +38,8 @@ class Login extends Component {
     firebase.login({
       provider: 'facebook',
       type: 'popup'
+    }).catch(error => {
+      this.setState({ error: error.message });
     });
   }
 
@@ -41,6 +49,8 @@ class Login extends Component {
     firebase.login({
       provider: 'twitter',
       type: 'popup'
+    }).catch(error => {
+      this.setState({ error: error.message });
     });
   }
 
@@ -50,10 +60,32 @@ class Login extends Component {
     firebase.login({
       email: val.email,
       password: val.password
+    }).catch(error => {
+      switch (error.code) {
+        case 'auth/user-not-found':
+        case 'auth/wrong-password':
+          this.setState({ error: 'Please check your email and password are correct.' });
+          break;
+        default:
+          this.setState({ error: error.message });
+          break;
+      }
     });
   }
 
   render() {
+    const { submitFailed, emailErrors, passwordErrors } = this.props;
+
+    const displayBlock = {display: 'block'};
+    const displayNone = {display: 'none'};
+
+    const isError = this.state.error || (submitFailed && (emailErrors.required || emailErrors.isEmail || passwordErrors.required ));
+    const firebaseErrorStyle = this.state.error ? displayBlock : displayNone;
+    const formErrorStyle = isError ? displayBlock : displayNone;
+    const emailRequiredErrorStyle = (submitFailed && emailErrors.required) ? displayBlock : displayNone;
+    const isEmailErrorStyle = (submitFailed && emailErrors.isEmail) ? displayBlock: displayNone;
+    const passwordRequiredErrorStyle = (submitFailed && passwordErrors.required) ? displayBlock : displayNone;
+
     return (
       <div className="login">
         <h1>Login</h1>
@@ -65,11 +97,24 @@ class Login extends Component {
                 password: { required }
               }}
         >
-          <label htmlFor="email">Email:</label>
-          <Control type='email' model='.email' />
+          <div style={formErrorStyle}>
+            <h2>Error</h2>
+            <p>You have one or more errors below</p>
+            <div style={firebaseErrorStyle}>{ this.state.error }</div>
+          </div>
 
-          <label htmlFor="password">Password:</label>
-          <Control type='password' model='.password' />
+          <div>
+            <label htmlFor="email">Email:</label>
+            <Control type='email' model='.email' />
+            <div style={emailRequiredErrorStyle}>An email is required</div>
+            <div style={isEmailErrorStyle}>Please provide a valid email address.</div>
+          </div>
+
+          <div>
+            <label htmlFor="password">Password:</label>
+            <Control type='password' model='.password' />
+            <div style={passwordRequiredErrorStyle}>Please provide a password</div>
+          </div>
 
           <button>Submit</button>
         </Form>

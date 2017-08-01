@@ -3,7 +3,7 @@
 A simple cms that uses react, redux, firebase, and the ORY editor to create websites.
 
 TODO:
-* Handle error messages throughout registration and login
+* reset password
 * fill out CMS a bit more
 * Layouts
 * Menus
