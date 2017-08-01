@@ -73,14 +73,17 @@ class Login extends Component {
 
           <button>Submit</button>
         </Form>
+
         <GoogleButton onClick={() => {
           this.loginWithGoogle();
         }} />
+
         <img alt="Login with Facebook" src='/login-facebook.png'
              onClick={() => {
                this.loginWithFacebook();
              }}
         />
+
         <img alt="Login with Twitter" src='/login-twitter.png'
              onClick={() => {
                this.loginWithTwitter();

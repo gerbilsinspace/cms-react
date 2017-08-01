@@ -7,10 +7,17 @@ const initialLogin = {
   password: ''
 };
 
+const initialRegister = {
+  email: '',
+  password: '',
+  passwordConfirm: ''
+};
+
 const rootReducer = combineReducers({
   firebase: firebaseStateReducer,
   ...createForms({
-    login: initialLogin
+    login: initialLogin,
+    register: initialRegister
   })
 });
 
