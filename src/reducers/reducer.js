@@ -13,11 +13,16 @@ const initialRegister = {
   passwordConfirm: ''
 };
 
+const initialForgottenPassword = {
+  email: ''
+};
+
 const rootReducer = combineReducers({
   firebase: firebaseStateReducer,
   ...createForms({
     login: initialLogin,
-    register: initialRegister
+    register: initialRegister,
+    forgottenPassword: initialForgottenPassword
   })
 });
 

@@ -7,6 +7,10 @@ import { isEmail, isEmpty } from 'validator';
 
 const required = str => !isEmpty(str);
 
+const addErrorStyling = isError => {
+  return { display: isError ? 'block' : 'none' };
+};
+
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -76,15 +80,12 @@ class Login extends Component {
   render() {
     const { submitFailed, emailErrors, passwordErrors } = this.props;
 
-    const displayBlock = {display: 'block'};
-    const displayNone = {display: 'none'};
-
     const isError = this.state.error || (submitFailed && (emailErrors.required || emailErrors.isEmail || passwordErrors.required ));
-    const firebaseErrorStyle = this.state.error ? displayBlock : displayNone;
-    const formErrorStyle = isError ? displayBlock : displayNone;
-    const emailRequiredErrorStyle = (submitFailed && emailErrors.required) ? displayBlock : displayNone;
-    const isEmailErrorStyle = (submitFailed && emailErrors.isEmail) ? displayBlock: displayNone;
-    const passwordRequiredErrorStyle = (submitFailed && passwordErrors.required) ? displayBlock : displayNone;
+    const firebaseErrorStyle = addErrorStyling(this.state.error);
+    const formErrorStyle = addErrorStyling(isError);
+    const emailRequiredErrorStyle = addErrorStyling(submitFailed && emailErrors.required);
+    const isEmailErrorStyle = addErrorStyling(submitFailed && emailErrors.isEmail);
+    const passwordRequiredErrorStyle = addErrorStyling(submitFailed && passwordErrors.required);
 
     return (
       <div className="login">
@@ -140,3 +141,4 @@ class Login extends Component {
 }
 
 export default firebaseConnect()(Login);
+
