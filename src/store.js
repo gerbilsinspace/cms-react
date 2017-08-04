@@ -1,7 +1,13 @@
 import * as firebase from 'firebase';
-import { createStore, compose } from 'redux';
+import { createStore, compose, applyMiddleware } from 'redux';
 import { reactReduxFirebase } from 'react-redux-firebase';
+import createHistory from 'history/createBrowserHistory';
+import { routerMiddleware } from 'react-router-redux';
+
 import reducer from './reducers/reducer';
+
+export const history = createHistory();
+const middleware = routerMiddleware(history);
 
 const {
   FIREBASE_API_KEY,
@@ -24,7 +30,8 @@ const rrfConfig = {
 firebase.initializeApp(firebaseConfig);
 
 const createStoreWithFirebase = compose(
-  reactReduxFirebase(firebase, rrfConfig),
+  applyMiddleware(middleware),
+  reactReduxFirebase(firebase, rrfConfig)
 )(createStore);
 
 const store = createStoreWithFirebase(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());

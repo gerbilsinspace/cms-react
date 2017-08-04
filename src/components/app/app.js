@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
+import { ConnectedRouter } from 'react-router-redux';
 import './app.css';
 
-import store from '../../store';
+import store, { history } from '../../store';
 import Router from '../../router/router';
 import Loading from '../loading/loading';
 
@@ -10,7 +11,11 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Loading children={ <Router /> } />
+        <Loading children={
+          <ConnectedRouter history={history}>
+            <Router />
+          </ConnectedRouter>
+        } />
       </Provider>
     );
   }

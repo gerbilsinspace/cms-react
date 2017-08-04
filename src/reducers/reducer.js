@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import { firebaseStateReducer } from 'react-redux-firebase';
+import { routerReducer } from 'react-router-redux';
 import { createForms } from 'react-redux-form';
 
 const initialLogin = {
@@ -17,12 +18,19 @@ const initialForgottenPassword = {
   email: ''
 };
 
+const initialResetPassword = {
+  password: '',
+  passwordConfirm: ''
+};
+
 const rootReducer = combineReducers({
   firebase: firebaseStateReducer,
+  router: routerReducer,
   ...createForms({
     login: initialLogin,
     register: initialRegister,
-    forgottenPassword: initialForgottenPassword
+    forgottenPassword: initialForgottenPassword,
+    resetPassword: initialResetPassword
   })
 });
 
