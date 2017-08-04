@@ -18,13 +18,16 @@ class ForgottenPassword extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
 
     this.state = {
-      error: ''
+      error: '',
+      success: false
     }
   }
 
   handleSubmit(val) {
     const { firebase } = this.props;
-    firebase.auth().sendPasswordResetEmail(val.email).catch(err => {
+    firebase.auth().sendPasswordResetEmail(val.email).then(() => {
+      this.setState({success: true});
+    }).catch(err => {
       this.setState({error: err.message});
     });
   }
@@ -33,11 +36,11 @@ class ForgottenPassword extends Component {
     const { submitFailed, emailErrors } = this.props;
 
     const isError = this.state.error || (submitFailed && (emailErrors.required || emailErrors.isEmail));
-
     const firebaseErrorStyle = addErrorStyling(this.state.error);
     const formErrorStyle = addErrorStyling(isError);
     const emailRequiredErrorStyle = addErrorStyling(submitFailed && emailErrors.isEmail);
     const isEmailErrorStyle = addErrorStyling(submitFailed && isEmail);
+    const isSuccessStyle = addErrorStyling(this.state.success);
 
     return (
       <div className="forgotten-password">
@@ -64,6 +67,8 @@ class ForgottenPassword extends Component {
 
           <button>Submit</button>
         </Form>
+
+        <div style={isSuccessStyle}>An email has been sent! :D</div>
       </div>
     );
   }
