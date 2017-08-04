@@ -21,7 +21,7 @@ class Routing extends Component {
               <ProtectedRoute path="/logout" component={Logout} />
               <RedirectIfLoggedIn path='/register' component={Register} />
               <RedirectIfLoggedIn path='/forgotten-password' component={ForgottenPassword} />
-              <RedirectIfLoggedIn path='/auth' component={Auth} />
+              <Route path='/auth' component={Auth} />
               <ProtectedRoute path='/cms' component={CMS} />
               <Route component={Error404} />
             </Switch>
