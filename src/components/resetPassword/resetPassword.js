@@ -25,7 +25,9 @@ class ResetPassword extends Component {
   handleSubmit(val) {
     const { code, firebase } = this.props;
 
-    firebase.confirmPasswordReset(code, val.password).catch(err => {
+    firebase.confirmPasswordReset(code, val.password).then(() => {
+      window.location = '/login';
+    }).catch(err => {
       this.setState({error: err.message});
     });
   }
