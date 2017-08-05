@@ -23,6 +23,10 @@ const initialResetPassword = {
   passwordConfirm: ''
 };
 
+const initialCreateMenu = {
+  name: ''
+};
+
 const rootReducer = combineReducers({
   firebase: firebaseStateReducer,
   router: routerReducer,
@@ -30,7 +34,8 @@ const rootReducer = combineReducers({
     login: initialLogin,
     register: initialRegister,
     forgottenPassword: initialForgottenPassword,
-    resetPassword: initialResetPassword
+    resetPassword: initialResetPassword,
+    createMenu: initialCreateMenu
   })
 });
 

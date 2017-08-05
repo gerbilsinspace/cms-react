@@ -1,10 +1,13 @@
 import './cms.css';
 import React from 'react';
+import CMSLayout from '../../components/cmsLayout/cmsLayout';
 
 const CMS = () => (
-  <div className="cms">
-    <h1>CMS</h1>
-  </div>
+  <CMSLayout>
+    <article>
+      <h1>Dashboard</h1>
+    </article>
+  </CMSLayout>
 );
 
 export default CMS;

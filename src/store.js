@@ -24,7 +24,8 @@ const firebaseConfig = {
 };
 
 const rrfConfig = {
-  userProfile: 'users'
+  userProfile: 'users',
+  menusProfile: 'menus'
 };
 
 firebase.initializeApp(firebaseConfig);
