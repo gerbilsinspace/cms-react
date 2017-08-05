@@ -3,13 +3,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { firebaseConnect } from 'react-redux-firebase';
 import { Control, Form } from 'react-redux-form';
-import { isEmail, isEmpty } from 'validator';
-
-const required = str => !isEmpty(str);
-
-const addErrorStyling = isError => {
-  return { display: isError ? 'block' : 'none' };
-};
+import { isEmail } from 'validator';
+import addStyle from '../../helpers/addStyle';
+import { required } from '../../helpers/error';
 
 class ForgottenPassword extends Component {
   constructor(props) {
@@ -36,11 +32,11 @@ class ForgottenPassword extends Component {
     const { submitFailed, emailErrors } = this.props;
 
     const isError = this.state.error || (submitFailed && (emailErrors.required || emailErrors.isEmail));
-    const firebaseErrorStyle = addErrorStyling(this.state.error);
-    const formErrorStyle = addErrorStyling(isError);
-    const emailRequiredErrorStyle = addErrorStyling(submitFailed && emailErrors.isEmail);
-    const isEmailErrorStyle = addErrorStyling(submitFailed && isEmail);
-    const isSuccessStyle = addErrorStyling(this.state.success);
+    const firebaseErrorStyle = addStyle(this.state.error);
+    const formErrorStyle = addStyle(isError);
+    const emailRequiredErrorStyle = addStyle(submitFailed && emailErrors.isEmail);
+    const isEmailErrorStyle = addStyle(submitFailed && isEmail);
+    const isSuccessStyle = addStyle(this.state.success);
 
     return (
       <div className="forgotten-password">

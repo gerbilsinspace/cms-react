@@ -3,13 +3,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { firebaseConnect } from 'react-redux-firebase';
 import { Control, Form } from 'react-redux-form';
-import { isEmpty } from 'validator';
-
-const required = str => !isEmpty(str);
-
-const passwordsMatch = ({ password, passwordConfirm }) => {
-  return password === passwordConfirm;
-};
+import addStyle from '../../helpers/addStyle';
+import { required, passwordsMatch } from '../../helpers/error';
 
 class ResetPassword extends Component {
   constructor(props) {
@@ -34,16 +29,12 @@ class ResetPassword extends Component {
 
   render() {
     const { submitFailed, formErrors, passwordErrors, passwordConfirmErrors } = this.props;
-    const displayBlock = {display: 'block'};
-    const displayNone = {display: 'none'};
-
     const isError = this.state.error || (submitFailed && (formErrors.passwordsMatch || passwordErrors.required || passwordConfirmErrors.required));
-
-    const firebaseErrorStyle = this.state.error ? displayBlock : displayNone;
-    const formErrorStyle = isError ? displayBlock : displayNone;
-    const passwordsMatchErrorStyle = (submitFailed && formErrors.passwordsMatch) ? displayBlock : displayNone;
-    const passwordRequiredErrorStyle = (submitFailed && passwordErrors.required) ? displayBlock : displayNone;
-    const passwordConfirmRequiredErrorStyle = (submitFailed && passwordConfirmErrors.required) ? displayBlock : displayNone;
+    const firebaseErrorStyle = addStyle(this.state.error);
+    const formErrorStyle = addStyle(isError);
+    const passwordsMatchErrorStyle = addStyle(submitFailed && formErrors.passwordsMatch);
+    const passwordRequiredErrorStyle = addStyle(submitFailed && passwordErrors.required);
+    const passwordConfirmRequiredErrorStyle = addStyle(submitFailed && passwordConfirmErrors.required);
 
     return (
       <div className='reset-password'>
@@ -66,7 +57,6 @@ class ResetPassword extends Component {
             <label htmlFor="password">Password:</label>
             <Control type='password' model='.password' />
             <div style={passwordRequiredErrorStyle}>Please provide a password.</div>
-            <div style={passwordsMatchErrorStyle}>Your passwords do not match.</div>
           </div>
           <div>
             <label htmlFor='passwordConfirm'>Confirm Password:</label>

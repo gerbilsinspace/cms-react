@@ -4,13 +4,9 @@ import { connect } from 'react-redux';
 import { firebaseConnect } from 'react-redux-firebase';
 import GoogleButton from 'react-google-button';
 import { Control, Form } from 'react-redux-form';
-import { isEmail, isEmpty } from 'validator';
-
-const required = str => !isEmpty(str);
-
-const passwordsMatch = ({ password, passwordConfirm }) => {
-  return password === passwordConfirm;
-}
+import { isEmail } from 'validator';
+import addStyle from '../../helpers/addStyle';
+import { required, passwordsMatch } from '../../helpers/error';
 
 class Register extends Component {
   constructor(props) {
@@ -71,18 +67,14 @@ class Register extends Component {
 
   render() {
     const { submitFailed, formErrors, emailErrors, passwordErrors, passwordConfirmErrors } = this.props;
-    const displayBlock = {display: 'block'};
-    const displayNone = {display: 'none'};
-
     const isError = this.state.error || (submitFailed && (formErrors.passwordsMatch || emailErrors.required || emailErrors.isEmail || passwordErrors.required || passwordConfirmErrors.required));
-
-    const firebaseErrorStyle = this.state.error ? displayBlock : displayNone;
-    const formErrorStyle = isError ? displayBlock : displayNone;
-    const passwordsMatchErrorStyle = (submitFailed && formErrors.passwordsMatch) ? displayBlock : displayNone;
-    const emailRequiredErrorStyle = (submitFailed && emailErrors.required) ? displayBlock : displayNone;
-    const isEmailErrorStyle = (submitFailed && emailErrors.isEmail) ? displayBlock : displayNone;
-    const passwordRequiredErrorStyle = (submitFailed && passwordErrors.required) ? displayBlock : displayNone;
-    const passwordConfirmRequiredErrorStyle = (submitFailed && passwordConfirmErrors.required) ? displayBlock : displayNone;
+    const firebaseErrorStyle = addStyle(this.state.error);
+    const formErrorStyle = addStyle(isError);
+    const passwordsMatchErrorStyle = addStyle(submitFailed && formErrors.passwordsMatch);
+    const emailRequiredErrorStyle = addStyle(submitFailed && emailErrors.required);
+    const isEmailErrorStyle = addStyle(submitFailed && emailErrors.isEmail);
+    const passwordRequiredErrorStyle = addStyle(submitFailed && passwordErrors.required);
+    const passwordConfirmRequiredErrorStyle = addStyle(submitFailed && passwordConfirmErrors.required);
 
     return (
       <div className="register">
@@ -112,7 +104,6 @@ class Register extends Component {
             <label htmlFor="password">Password:</label>
             <Control type='password' model='.password' />
             <div style={passwordRequiredErrorStyle}>Please provide a password.</div>
-            <div style={passwordsMatchErrorStyle}>Your passwords do not match.</div>
           </div>
           <div>
             <label htmlFor="passwordConfirm">Confirm Password:</label>

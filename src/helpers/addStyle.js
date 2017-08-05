@@ -6,6 +6,6 @@ const displayNone = {
   display: 'none'
 };
 
-export const addStyle = (ifStatement) => {
-  return ifStatement ? displayBlock : displayNone;
-};
+const addStyle = ifStatement => (ifStatement ? displayBlock : displayNone);
+
+export default addStyle;

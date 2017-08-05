@@ -3,13 +3,9 @@ import React, { Component } from 'react';
 import { firebaseConnect } from 'react-redux-firebase';
 import GoogleButton from 'react-google-button';
 import { Control, Form } from 'react-redux-form';
-import { isEmail, isEmpty } from 'validator';
-
-const required = str => !isEmpty(str);
-
-const addErrorStyling = isError => {
-  return { display: isError ? 'block' : 'none' };
-};
+import { isEmail } from 'validator';
+import addStyle from '../../helpers/addStyle';
+import { required } from '../../helpers/error';
 
 class Login extends Component {
   constructor(props) {
@@ -81,11 +77,11 @@ class Login extends Component {
     const { submitFailed, emailErrors, passwordErrors } = this.props;
 
     const isError = this.state.error || (submitFailed && (emailErrors.required || emailErrors.isEmail || passwordErrors.required ));
-    const firebaseErrorStyle = addErrorStyling(this.state.error);
-    const formErrorStyle = addErrorStyling(isError);
-    const emailRequiredErrorStyle = addErrorStyling(submitFailed && emailErrors.required);
-    const isEmailErrorStyle = addErrorStyling(submitFailed && emailErrors.isEmail);
-    const passwordRequiredErrorStyle = addErrorStyling(submitFailed && passwordErrors.required);
+    const firebaseErrorStyle = addStyle(this.state.error);
+    const formErrorStyle = addStyle(isError);
+    const emailRequiredErrorStyle = addStyle(submitFailed && emailErrors.required);
+    const isEmailErrorStyle = addStyle(submitFailed && emailErrors.isEmail);
+    const passwordRequiredErrorStyle = addStyle(submitFailed && passwordErrors.required);
 
     return (
       <div className="login">
