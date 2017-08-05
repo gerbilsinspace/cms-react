@@ -51,9 +51,11 @@ class Menus extends Component {
     const nameRequiredStyle = addStyle(submitFailed && nameErrors.required);
     const uniqueNameStyle = addStyle(submitFailed && nameErrors.uniqueName);
 
-    const menuList = !isLoaded(menus) ? 'Loading' : isEmpty(menus) ? 'Please create a menu' : Object.keys(menus).map((key, id) => (
-      <CMSMenuItem key={key} id={id} menu={menus[key]} />
-    ));
+    const menuList = !isLoaded(menus) ? 'Loading' : isEmpty(menus) ? 'Please create a menu' : Object.keys(menus).map((key, id) => {
+      return (
+        <CMSMenuItem key={key} id={id} menu={menus[key]} />
+      );
+    });
 
     return (
       <CMSLayout>
@@ -96,7 +98,7 @@ class Menus extends Component {
 };
 
 const mapStateToProps = state => ({
-  menus: state.firebase.data.menus,
+  menus: state.firebase.ordered.menus,
   submitFailed: state.forms.createMenu.$form.submitFailed,
   nameErrors: state.forms.createMenu.name.errors
 });
@@ -108,6 +110,8 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default compose(
-  firebaseConnect(['/menus']),
+  firebaseConnect([
+    '/menus#orderByChild=name'
+  ]),
   connect(mapStateToProps, mapDispatchToProps)
 )(Menus)

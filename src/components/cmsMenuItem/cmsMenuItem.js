@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 
 class MenuItem extends Component {
   render() {
-    const { id, menu } = this.props;
+    const { menu } = this.props;
 
     return (
-      <div>{id}: {menu.name} <Link to={`/cms/menus/${id}`}>Edit</Link></div>
+      <div>{menu.name} <Link to={`/cms/menus/${menu.key}`}>Edit</Link></div>
     );
   }
 };
