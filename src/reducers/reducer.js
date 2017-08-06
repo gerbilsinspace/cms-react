@@ -27,6 +27,11 @@ const initialCreateMenu = {
   name: ''
 };
 
+const initialAddLinkToMenu = {
+  url: '',
+  text: ''
+}
+
 const rootReducer = combineReducers({
   firebase: firebaseStateReducer,
   router: routerReducer,
@@ -35,7 +40,8 @@ const rootReducer = combineReducers({
     register: initialRegister,
     forgottenPassword: initialForgottenPassword,
     resetPassword: initialResetPassword,
-    createMenu: initialCreateMenu
+    createMenu: initialCreateMenu,
+    addLinkToMenu: initialAddLinkToMenu
   })
 });
 
