@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import CMS from '../views/cms/cms';
 import CMSMenus from '../views/cmsMenus/cmsMenus';
+import CMSMenu from '../views/cmsMenu/cmsMenu';
 import Error404 from '../views/error404/error404';
 import ForgottenPassword from '../views/forgottenPassword/forgottenPassword';
 import Login from '../views/login/login';
@@ -23,6 +24,7 @@ class Routing extends Component {
               <Route path='/auth' component={Auth} />
               <ProtectedRoute exact path='/cms' component={CMS} />
               <ProtectedRoute exact path='/cms/menus' component={CMSMenus} />
+              <ProtectedRoute path='/cms/menus/:id' component={CMSMenu} />
               <Route component={Error404} />
             </Switch>
           </div>

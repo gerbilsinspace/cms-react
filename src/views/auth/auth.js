@@ -1,23 +1,19 @@
 import './auth.css';
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 
 import ResetPassword from '../../components/resetPassword/resetPassword';
 
-class Auth extends Component {
-  render() {
-    const { authMode, code } = this.props;
-
-    switch (authMode) {
-      case 'resetPassword':
-        return (
-          <ResetPassword code={code} />
-        );
-      default:
-        return null;
-    }
+const Auth = ({ authMode, code }) => {
+  switch (authMode) {
+    case 'resetPassword':
+      return (
+        <ResetPassword code={code} />
+      );
+    default:
+      return null;
   }
-}
+};
 
 const mapStateToProps = state => {
   const authMode = (state.router.location.search.replace(/\?mode=/g, '').replace(/&[\s\S]*/g, ''));
