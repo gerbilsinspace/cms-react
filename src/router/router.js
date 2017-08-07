@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import CMS from '../views/cms/cms';
+import CMSTemplates from '../views/cmsTemplates/cmsTemplates';
+import CMSTemplate from '../views/cmsTemplate/cmsTemplate';
 import CMSMenus from '../views/cmsMenus/cmsMenus';
 import CMSMenu from '../views/cmsMenu/cmsMenu';
 import Error404 from '../views/error404/error404';
@@ -25,6 +27,8 @@ class Routing extends Component {
               <ProtectedRoute exact path='/cms' component={CMS} />
               <ProtectedRoute exact path='/cms/menus' component={CMSMenus} />
               <ProtectedRoute path='/cms/menus/:id' component={CMSMenu} />
+              <ProtectedRoute exact path='/cms/templates' component={CMSTemplates} />
+              <ProtectedRoute path='/cms/templates/:id' component={CMSTemplate} />
               <Route component={Error404} />
             </Switch>
           </div>
