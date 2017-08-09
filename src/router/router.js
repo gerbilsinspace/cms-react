@@ -6,6 +6,8 @@ import CMSTemplates from '../views/cmsTemplates/cmsTemplates';
 import CMSTemplate from '../views/cmsTemplate/cmsTemplate';
 import CMSMenus from '../views/cmsMenus/cmsMenus';
 import CMSMenu from '../views/cmsMenu/cmsMenu';
+import CMSPages from '../views/cmsPages/cmsPages';
+import CMSPage from '../views/cmsPage/cmsPage';
 import Error404 from '../views/error404/error404';
 import ForgottenPassword from '../views/forgottenPassword/forgottenPassword';
 import Login from '../views/login/login';
@@ -29,6 +31,8 @@ class Routing extends Component {
               <ProtectedRoute path='/cms/menus/:id' component={CMSMenu} />
               <ProtectedRoute exact path='/cms/templates' component={CMSTemplates} />
               <ProtectedRoute path='/cms/templates/:id' component={CMSTemplate} />
+              <ProtectedRoute exact path='/cms/pages' component={CMSPages} />
+              <ProtectedRoute path='/cms/pages/:id' component={CMSPage} />
               <Route component={Error404} />
             </Switch>
           </div>
