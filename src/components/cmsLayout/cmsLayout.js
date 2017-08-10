@@ -1,6 +1,6 @@
 import './cmsLayout.css';
 import React, { Component } from 'react';
-import CMSSidebar from '../cmsSidebar/cmsSidebar';
+import CMSSidebar from '../cmsSidebar';
 
 class CMSLayout extends Component {
   render() {

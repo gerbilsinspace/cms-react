@@ -1,11 +1,11 @@
 import './cmsTemplate.css';
 import React, { Component } from 'react';
-import CMSLayout from '../../components/cmsLayout/cmsLayout';
 import { connect } from 'react-redux';
 import { firebaseConnect, isEmpty } from 'react-redux-firebase';
 import { Form, Control, actions } from 'react-redux-form';
 import { Link } from 'react-router-dom';
 import { compose } from 'redux';
+import CMSLayout from '../../components/cmsLayout';
 import { required } from '../../helpers/error';
 import addStyle from '../../helpers/addStyle';
 

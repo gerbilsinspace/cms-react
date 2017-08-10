@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import CMS from '../views/cms/cms';
-import CMSTemplates from '../views/cmsTemplates/cmsTemplates';
-import CMSTemplate from '../views/cmsTemplate/cmsTemplate';
-import CMSMenus from '../views/cmsMenus/cmsMenus';
-import CMSMenu from '../views/cmsMenu/cmsMenu';
-import CMSPages from '../views/cmsPages/cmsPages';
-import CMSPage from '../views/cmsPage/cmsPage';
-import CMSPartials from '../views/cmsPartials/cmsPartials';
-import CMSPartial from '../views/cmsPartial/cmsPartial';
-import Error404 from '../views/error404/error404';
-import ForgottenPassword from '../views/forgottenPassword/forgottenPassword';
-import Login from '../views/login/login';
-import RedirectIfLoggedIn from '../components/redirectIfLoggedIn/redirectIfLoggedIn';
-import Register from '../views/register/register';
-import Auth from '../views/auth/auth';
-import ProtectedRoute from '../components/protectedRoute/protectedRoute';
+import CMS from '../views/cms';
+import CMSTemplates from '../views/cmsTemplates';
+import CMSTemplate from '../views/cmsTemplate';
+import CMSMenus from '../views/cmsMenus';
+import CMSMenu from '../views/cmsMenu';
+import CMSPages from '../views/cmsPages';
+import CMSPage from '../views/cmsPage';
+import CMSPartials from '../views/cmsPartials';
+import CMSPartial from '../views/cmsPartial';
+import Error404 from '../views/error404';
+import ForgottenPassword from '../views/forgottenPassword';
+import Login from '../views/login';
+import RedirectIfLoggedIn from '../components/redirectIfLoggedIn';
+import Register from '../views/register';
+import Auth from '../views/auth';
+import ProtectedRoute from '../components/protectedRoute';
 
 class Routing extends Component {
   render() {

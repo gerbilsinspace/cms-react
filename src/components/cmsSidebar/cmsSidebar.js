@@ -2,7 +2,7 @@ import './cmsSidebar.css';
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Logout from '../logout/logout';
+import Logout from '../logout';
 
 const CMSSidebar = ({ user }) => (
   <div className="cms-sidebar">

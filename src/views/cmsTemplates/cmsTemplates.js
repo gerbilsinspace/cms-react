@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { firebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase';
 import { Form, Control, actions } from 'react-redux-form';
 import { compose } from 'redux';
-import CMSLayout from '../../components/cmsLayout/cmsLayout';
-import CMSTemplateItem from '../../components/cmsTemplateItem/cmsTemplateItem';
+import CMSLayout from '../../components/cmsLayout';
+import CMSTemplateItem from '../../components/cmsTemplateItem';
 import addStyle from '../../helpers/addStyle';
 import { required } from '../../helpers/error';
 

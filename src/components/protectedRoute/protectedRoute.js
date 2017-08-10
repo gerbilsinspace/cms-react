@@ -16,7 +16,7 @@ const ProtectedRoute = ({ component: Component, ...rest }) => (
         state: { from: props.location }
       }}/>
     )
-  )}/>
+  )} />
 );
 
 const mapStateToProps = (state) => ({
@@ -24,4 +24,3 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps)(ProtectedRoute);
-

@@ -2,7 +2,7 @@ import './auth.css';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import ResetPassword from '../../components/resetPassword/resetPassword';
+import ResetPassword from '../../components/resetPassword';
 
 const Auth = ({ authMode, code }) => {
   switch (authMode) {

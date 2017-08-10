@@ -4,7 +4,7 @@ import { reactReduxFirebase } from 'react-redux-firebase';
 import createHistory from 'history/createBrowserHistory';
 import { routerMiddleware } from 'react-router-redux';
 
-import reducer from './reducers/reducer';
+import reducer from './reducer';
 
 export const history = createHistory();
 const middleware = routerMiddleware(history);
