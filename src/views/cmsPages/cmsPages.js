@@ -1,4 +1,3 @@
-import './cmsPages.css';
 import React from 'react';
 
 const Pages = () => (

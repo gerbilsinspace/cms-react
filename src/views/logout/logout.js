@@ -1,4 +1,3 @@
-import './logout.css';
 import React, { Component } from 'react';
 import { firebaseConnect } from 'react-redux-firebase';
 

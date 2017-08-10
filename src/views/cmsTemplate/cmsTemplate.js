@@ -1,4 +1,3 @@
-import './cmsTemplate.css';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { firebaseConnect, isEmpty } from 'react-redux-firebase';

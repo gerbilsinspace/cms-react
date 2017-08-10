@@ -1,4 +1,3 @@
-import './error404.css';
 import React from 'react';
 
 const Error404 = () => (

@@ -1,4 +1,3 @@
-import './cmsPartial.css';
 import React from 'react';
 
 const Partial = () => (

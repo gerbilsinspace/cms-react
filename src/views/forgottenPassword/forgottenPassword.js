@@ -1,4 +1,3 @@
-import './forgottenPassword.css';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { firebaseConnect } from 'react-redux-firebase';

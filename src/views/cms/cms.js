@@ -1,4 +1,3 @@
-import './cms.css';
 import React from 'react';
 import CMSLayout from '../../components/cmsLayout';
 

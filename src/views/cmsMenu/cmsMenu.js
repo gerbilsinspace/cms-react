@@ -1,4 +1,3 @@
-import './cmsMenu.css';
 import React, { Component } from 'react';
 import CMSLayout from '../../components/cmsLayout/cmsLayout';
 import { connect } from 'react-redux';

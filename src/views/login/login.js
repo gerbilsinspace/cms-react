@@ -1,4 +1,3 @@
-import './login.css';
 import React, { Component } from 'react';
 import { firebaseConnect } from 'react-redux-firebase';
 import GoogleButton from 'react-google-button';
