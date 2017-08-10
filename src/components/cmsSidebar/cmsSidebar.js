@@ -19,6 +19,12 @@ const CMSSidebar = ({ user }) => (
       <li>
         <Link to='/cms/templates'>Templates</Link>
       </li>
+      <li>
+        <Link to='/cms/partials'>Partials</Link>
+      </li>
+      <li>
+        <Link to='/cms/pages'>Pages</Link>
+      </li>
     </ul>
   </div>
 );
