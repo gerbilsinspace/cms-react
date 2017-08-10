@@ -4,7 +4,7 @@ import { firebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase';
 import { Form, Control, actions } from 'react-redux-form';
 import { compose } from 'redux';
 import CMSLayout from '../../components/cmsLayout';
-import CMSTemplateItem from '../../components/cmsTemplateItem';
+import CMSListItem from '../../components/cmsListItem';
 import addStyle from '../../helpers/addStyle';
 import { required } from '../../helpers/error';
 
@@ -52,7 +52,7 @@ class Templates extends Component {
 
     const templateList = !isLoaded(templates) ? 'Loading' : isEmpty(templates) ? 'Please create a template' : Object.keys(templates).map((key, id) => {
       return (
-        <CMSTemplateItem key={key} id={id} template={templates[key]} />
+        <CMSListItem key={key} name={templates[key].name} itemKey={key} type="templates" />
       );
     });
 
