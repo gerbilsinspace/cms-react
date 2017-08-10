@@ -2,51 +2,20 @@ import { combineReducers } from 'redux';
 import { firebaseStateReducer } from 'react-redux-firebase';
 import { routerReducer } from 'react-router-redux';
 import { createForms } from 'react-redux-form';
-
-const initialLogin = {
-  email: '',
-  password: ''
-};
-
-const initialRegister = {
-  email: '',
-  password: '',
-  passwordConfirm: ''
-};
-
-const initialForgottenPassword = {
-  email: ''
-};
-
-const initialResetPassword = {
-  password: '',
-  passwordConfirm: ''
-};
-
-const initialCreateMenu = {
-  name: ''
-};
-
-const initialAddLinkToMenu = {
-  url: '',
-  text: ''
-}
-
-const initialCreateTemplate = {
-  name: ''
-};
+import models from '../models';
 
 const rootReducer = combineReducers({
   firebase: firebaseStateReducer,
   router: routerReducer,
   ...createForms({
-    login: initialLogin,
-    register: initialRegister,
-    forgottenPassword: initialForgottenPassword,
-    resetPassword: initialResetPassword,
-    createMenu: initialCreateMenu,
-    addLinkToMenu: initialAddLinkToMenu,
-    createTemplate: initialCreateTemplate
+    login: models.login,
+    register: models.register,
+    forgottenPassword: models.forgottenPassword,
+    resetPassword: models.resetPassword,
+    createMenu: models.createMenu,
+    addLinkToMenu: models.addLinkToMenu,
+    createTemplate: models.createTemplate,
+    createPage: models.createPage
   })
 });
 
