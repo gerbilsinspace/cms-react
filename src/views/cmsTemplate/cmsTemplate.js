@@ -1,46 +1,7 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { firebaseConnect, isEmpty } from 'react-redux-firebase';
-import { Form, Control, actions } from 'react-redux-form';
-import { Link } from 'react-router-dom';
-import { compose } from 'redux';
-import CMSLayout from '../../components/cmsLayout';
-import { required } from '../../helpers/error';
-import addStyle from '../../helpers/addStyle';
+import React from 'react';
 
-class Template extends Component {
-  constructor(props) {
-    super(props);
+const Template = () => (
+  <div></div>
+);
 
-    this.handleSubmit = this.handleSubmit.bind(this);
-
-    this.state = {
-      error: ''
-    };
-  }
-
-  handleSubmit(val) {
-    const { firebase, match } = this.props;
-  }
-
-  render() {
-    return (
-      <CMSLayout>
-        <article>
-          <h1>Layout</h1>
-        </article>
-      </CMSLayout>
-    );
-  }
-};
-
-const mapStateToProps = (state, ownProps) => ({
-});
-
-const mapDispatchToProps = dispatch => ({
-});
-
-export default compose(
-  firebaseConnect(['/templates#orderByChild=name']),
-  connect(mapStateToProps, mapDispatchToProps)
-)(Template);
+export default Template;
