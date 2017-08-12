@@ -18,6 +18,7 @@ const Partials = ({
            firebase={firebase}
            clearItemAction={clearItemAction}
            itemNameLowercase='partial'
+           itemNameLowercasePlural='partials'
            itemNameUppercase='Partial'
            itemNameUppercasePlural='Partials'
            itemFirebaseUrl='/partials'

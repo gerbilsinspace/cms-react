@@ -18,6 +18,7 @@ const Menus = ({
            firebase={firebase}
            clearItemAction={clearItemAction}
            itemNameLowercase='menu'
+           itemNameLowercasePlural='menus'
            itemNameUppercase='Menu'
            itemNameUppercasePlural='Menus'
            itemFirebaseUrl='/menus'

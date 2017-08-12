@@ -11,6 +11,7 @@ const CMSList = ({
   firebase,
   clearItemAction,
   itemNameLowercase,
+  itemNameLowercasePlural,
   itemNameUppercase,
   itemNameUppercasePlural,
   itemFirebaseUrl
@@ -22,7 +23,7 @@ const CMSList = ({
       <CMSListItem key={key}
                    name={items[id].name}
                    itemKey={items[id].key}
-                   type={itemNameLowercase}
+                   type={itemNameLowercasePlural}
       />
     );
   });

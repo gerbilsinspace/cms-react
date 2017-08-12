@@ -18,6 +18,7 @@ const Templates = ({
            firebase={firebase}
            clearItemAction={clearItemAction}
            itemNameLowercase='template'
+           itemNameLowercasePlural='templates'
            itemNameUppercase='Template'
            itemNameUppercasePlural='Templates'
            itemFirebaseUrl='/templates'

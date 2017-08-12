@@ -18,6 +18,7 @@ const Pages = ({
            firebase={firebase}
            clearItemAction={clearItemAction}
            itemNameLowercase='page'
+           itemNameLowercasePlural='pages'
            itemNameUppercase='Page'
            itemNameUppercasePlural='Pages'
            itemFirebaseUrl='/pages'
