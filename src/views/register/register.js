@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { firebaseConnect } from 'react-redux-firebase';
 import GoogleButton from 'react-google-button';
 import { Control, Form } from 'react-redux-form';
+import { compose } from 'redux';
 import { isEmail } from 'validator';
 import addStyle from '../../helpers/addStyle';
 import { required, passwordsMatch } from '../../helpers/error';
@@ -141,5 +142,8 @@ const mapStateToProps = (state) => ({
   passwordConfirmErrors: state.forms.register.passwordConfirm.errors
 });
 
-const wrappedRegister = firebaseConnect()(Register);
-export default connect(mapStateToProps)(wrappedRegister);
+export default compose(
+  firebaseConnect(),
+  connect(mapStateToProps)
+)(Register);
+

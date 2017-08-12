@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { firebaseConnect } from 'react-redux-firebase';
 import { Control, Form } from 'react-redux-form';
+import { compose } from 'redux';
 import { isEmail } from 'validator';
 import addStyle from '../../helpers/addStyle';
 import { required } from '../../helpers/error';
@@ -75,5 +76,8 @@ const mapStateToProps = state => ({
   emailErrors: state.forms.forgottenPassword.email.errors
 });
 
-const wrappedForgottenPassword = firebaseConnect()(ForgottenPassword);
-export default connect(mapStateToProps)(wrappedForgottenPassword);
+export default compose(
+  firebaseConnect(),
+  connect(mapStateToProps)
+)(ForgottenPassword);
+
