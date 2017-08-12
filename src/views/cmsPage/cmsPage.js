@@ -65,7 +65,8 @@ class Page extends Component {
     const editorState = JSON.parse(nextProps.page.editorState);
 
     if (editorState) {
-      content = editorState;
+      editorState.id = content.id;
+      editor.trigger.editable.update(editorState);
     }
   }
 
