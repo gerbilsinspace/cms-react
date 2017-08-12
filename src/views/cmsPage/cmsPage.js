@@ -62,7 +62,11 @@ class Page extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const editorState = JSON.parse(nextProps.page.editorState);
+    let editorState = '';
+
+    if (nextProps && nextProps.page && nextProps.page.editorState) {
+      editorState = JSON.parse(nextProps.page.editorState);
+    }
 
     if (editorState) {
       editorState.id = content.id;

@@ -10,13 +10,13 @@ import CMSPages from '../views/cmsPages';
 import CMSPage from '../views/cmsPage';
 import CMSPartials from '../views/cmsPartials';
 import CMSPartial from '../views/cmsPartial';
-import Error404 from '../views/error404';
 import ForgottenPassword from '../views/forgottenPassword';
 import Login from '../views/login';
 import RedirectIfLoggedIn from '../components/redirectIfLoggedIn';
 import Register from '../views/register';
 import Auth from '../views/auth';
 import ProtectedRoute from '../components/protectedRoute';
+import GeneratedPage from '../views/generatedPage';
 
 class Routing extends Component {
   render() {
@@ -37,7 +37,7 @@ class Routing extends Component {
               <ProtectedRoute path='/cms/pages/:id' component={CMSPage} />
               <ProtectedRoute exact path='/cms/partials' component={CMSPartials} />
               <ProtectedRoute path='/cms/partials/:id' component={CMSPartial} />
-              <Route component={Error404} />
+              <Route component={GeneratedPage} />
             </Switch>
           </div>
         </Router>
