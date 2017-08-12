@@ -27,7 +27,7 @@ const Menus = ({
 const mapStateToProps = state => ({
   items: state.firebase.ordered.pages,
   submitFailed: state.forms.createMenu.$form.submitFailed,
-  nameErrors: state.form.createMenu.name.errors
+  nameErrors: state.forms.createMenu.name.errors
 });
 
 const mapDispatchToProps = dispatch => ({
