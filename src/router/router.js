@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-
+import { Switch, Route } from 'react-router-dom';
+import { ConnectedRouter as Router } from 'react-router-redux';
+import createHistory from 'history/createBrowserHistory';
 import CMS from '../views/cms';
 import CMSTemplates from '../views/cmsTemplates';
 import CMSTemplate from '../views/cmsTemplate';
@@ -18,10 +19,12 @@ import Auth from '../views/auth';
 import ProtectedRoute from '../components/protectedRoute';
 import GeneratedPage from '../views/generatedPage';
 
+const history = createHistory();
+
 class Routing extends Component {
   render() {
     return (
-      <Router>
+      <Router history={history}>
           <div className="app">
             <Switch>
               <RedirectIfLoggedIn path="/login" component={Login} />
