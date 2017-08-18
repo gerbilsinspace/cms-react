@@ -27,7 +27,12 @@ export const addLinkToMenu = {
   text: ''
 }
 
+export const createPage = {
+  name: '',
+  slug: ''
+};
+
 export const createMenu = initialCreateState;
 export const createTemplate = initialCreateState;
 export const createPartial = initialCreateState;
-export const createPage = initialCreateState;
+

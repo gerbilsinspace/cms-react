@@ -23,7 +23,7 @@ const plugins = {
   layout: [parallax({ defaultPlugin: slate() })]
 };
 
-const GeneratedPage = ({match, pages}) => {
+const GeneratedPage = ({pathname, pages}) => {
   let pageKeys = [];
 
   if (!pages) {
@@ -35,13 +35,9 @@ const GeneratedPage = ({match, pages}) => {
   }
 
   for (let i = 0; i < pageKeys.length; i++) {
-    const { name, editorState } = pages[pageKeys[i]];
+    const { slug, editorState } = pages[pageKeys[i]];
 
-    if (name === 'home' && match.path === '/' && match.isExact === true) {
-      return (<HTMLRenderer plugins={plugins} state={JSON.parse(editorState)} />);
-    }
-
-    if (name === match.patch) {
+    if (slug === pathname) {
       return (<HTMLRenderer plugins={plugins} state={JSON.parse(editorState)} />);
     }
   }
@@ -52,7 +48,8 @@ const GeneratedPage = ({match, pages}) => {
 }
 
 const mapStateToProps = state => ({
-    pages: state.firebase.data.pages
+    pages: state.firebase.data.pages,
+    pathname: state.router.location.pathname
 });
 
 export default compose(
