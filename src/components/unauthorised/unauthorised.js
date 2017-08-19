@@ -1,10 +1,10 @@
 import React from 'react';
 
-const LoggedInButUnauthorised = () => (
+const Unauthorised = () => (
   <div>
-    <h1>Awaiting authorisation</h1>
+    <h1>Awaiting Authorisation</h1>
     <p>In order to make edits to this website, you need an admin to give you permission.</p>
   </div>
 );
 
-export default LoggedInButUnauthorised;
+export default Unauthorised;

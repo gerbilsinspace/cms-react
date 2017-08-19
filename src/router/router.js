@@ -17,6 +17,7 @@ import RedirectIfLoggedIn from '../components/redirectIfLoggedIn';
 import Register from '../views/register';
 import Auth from '../views/auth';
 import ProtectedRoute from '../components/protectedRoute';
+import Unauthorised from '../components/unauthorised';
 import GeneratedPage from '../views/generatedPage';
 
 const history = createHistory();
@@ -40,6 +41,7 @@ class Routing extends Component {
               <ProtectedRoute path='/cms/pages/:id' component={CMSPage} />
               <ProtectedRoute exact path='/cms/partials' component={CMSPartials} />
               <ProtectedRoute path='/cms/partials/:id' component={CMSPartial} />
+              <Route path='/unauthorised' component={Unauthorised} />
               <Route component={GeneratedPage} />
             </Switch>
           </div>

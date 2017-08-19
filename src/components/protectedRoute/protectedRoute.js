@@ -7,32 +7,46 @@ import {
   Redirect
 } from 'react-router-dom';
 
-const ProtectedRoute = ({ component: Component, ...rest }) => (
+const ProtectedRoute = ({
+  component: Component,
+  role,
+  userKeyLength,
+  ...rest
+}) => (
   <Route {...rest} render={props => {
-    if (!rest.profile.isEmpty) {
-      if (!rest.profile.role) {
-        if (rest.userKeyLength === 1) {
-          rest.firebase.updateProfile({
-            role: 'owner'
-          });
-        } else if (rest.userKeyLength > 1) {
-          rest.firebase.updateProfile({
-            role: 'unauthorised'
-          });
-        }
-      }
-
+    if (rest.profile.isEmpty) { // if user has no valid account
       return (
-        <Component {...props} />
+        <Redirect to={{
+          pathname: '/login',
+          state: { from: props.location }
+        }}/>
+      )
+    }
+
+    if (!role) { // first time user has logged in, has no role set.
+      if (userKeyLength === 1) {
+        rest.firebase.updateProfile({
+          role: 'owner'
+        });
+      } else if (userKeyLength > 1) {
+        rest.firebase.updateProfile({
+          role: 'unauthorised'
+        });
+      }
+    }
+
+    if (role === 'unauthorised') { // if admin hasn't given user edit rights
+      return (
+        <Redirect to={{
+          pathname: '/unauthorised',
+          state: { from: props.location }
+        }} />
       );
     }
 
     return (
-      <Redirect to={{
-        pathname: '/login',
-        state: { from: props.location }
-      }}/>
-    )
+      <Component {...props} />
+    );
   }} />
 );
 
@@ -45,7 +59,8 @@ const mapStateToProps = (state) => {
 
   return {
     profile: state.firebase.profile,
-    userKeyLength: userKeyLength
+    userKeyLength: userKeyLength,
+    role: state.firebase.profile.role
   };
 }
 
