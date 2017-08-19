@@ -26,26 +26,26 @@ class Routing extends Component {
   render() {
     return (
       <Router history={history}>
-          <div className="app">
-            <Switch>
-              <RedirectIfLoggedIn path="/login" component={Login} />
-              <RedirectIfLoggedIn path='/register' component={Register} />
-              <RedirectIfLoggedIn path='/forgotten-password' component={ForgottenPassword} />
-              <Route path='/auth' component={Auth} />
-              <ProtectedRoute exact path='/cms' component={CMS} />
-              <ProtectedRoute exact path='/cms/menus' component={CMSMenus} />
-              <ProtectedRoute path='/cms/menus/:id' component={CMSMenu} />
-              <ProtectedRoute exact path='/cms/templates' component={CMSTemplates} />
-              <ProtectedRoute path='/cms/templates/:id' component={CMSTemplate} />
-              <ProtectedRoute exact path='/cms/pages' component={CMSPages} />
-              <ProtectedRoute path='/cms/pages/:id' component={CMSPage} />
-              <ProtectedRoute exact path='/cms/partials' component={CMSPartials} />
-              <ProtectedRoute path='/cms/partials/:id' component={CMSPartial} />
-              <Route path='/unauthorised' component={Unauthorised} />
-              <Route component={GeneratedPage} />
-            </Switch>
-          </div>
-        </Router>
+        <div className="app">
+          <Switch>
+            <RedirectIfLoggedIn path="/login" component={Login} />
+            <RedirectIfLoggedIn path="/register" component={Register} />
+            <RedirectIfLoggedIn path="/forgotten-password" component={ForgottenPassword} />
+            <Route path="/auth" component={Auth} />
+            <ProtectedRoute exact path="/cms" component={CMS} />
+            <ProtectedRoute exact path="/cms/menus" component={CMSMenus} />
+            <ProtectedRoute path="/cms/menus/:id" component={CMSMenu} />
+            <ProtectedRoute exact path="/cms/templates" component={CMSTemplates} />
+            <ProtectedRoute path="/cms/templates/:id" component={CMSTemplate} />
+            <ProtectedRoute exact path="/cms/pages" component={CMSPages} />
+            <ProtectedRoute path="/cms/pages/:id" component={CMSPage} />
+            <ProtectedRoute exact path="/cms/partials" component={CMSPartials} />
+            <ProtectedRoute path="/cms/partials/:id" component={CMSPartial} />
+            <Route path="/unauthorised" component={Unauthorised} />
+            <Route component={GeneratedPage} />
+          </Switch>
+        </div>
+      </Router>
     );
   }
 }

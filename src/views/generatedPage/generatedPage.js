@@ -4,18 +4,21 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { HTMLRenderer } from 'ory-editor-renderer';
 import Error404 from '../error404';
-import { contentPlugins, layoutPlugins } from '../../helpers/editorConfig.js';
+import { contentPlugins, layoutPlugins } from '../../helpers/editorConfig';
 
 const plugins = {
   content: contentPlugins,
-  layout: layoutPlugins
+  layout: layoutPlugins,
 };
 
-const GeneratedPage = ({pathname, pages}) => {
+const GeneratedPage = ({
+  pathname,
+  pages,
+}) => {
   let pageKeys = [];
 
   if (!pages) {
-    return (<div></div>);
+    return (<div />);
   }
 
   if (pages) {
@@ -30,19 +33,17 @@ const GeneratedPage = ({pathname, pages}) => {
     }
   }
 
-  return (
-    <Error404 />
-  );
-}
+  return (<Error404 />);
+};
 
 const mapStateToProps = state => ({
-    pages: state.firebase.data.pages,
-    pathname: state.router.location.pathname
+  pages: state.firebase.data.pages,
+  pathname: state.router.location.pathname,
 });
 
 export default compose(
   firebaseConnect([
-    'pages'
+    'pages',
   ]),
-  connect(mapStateToProps)
+  connect(mapStateToProps),
 )(GeneratedPage);

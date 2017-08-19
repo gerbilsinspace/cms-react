@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Template = () => (
-  <div></div>
+  <div />
 );
 
 export default Template;

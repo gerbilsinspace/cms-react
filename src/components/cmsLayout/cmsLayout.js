@@ -12,6 +12,6 @@ class CMSLayout extends Component {
       </div>
     );
   }
-};
+}
 
 export default CMSLayout;

@@ -16,8 +16,8 @@ class Login extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
 
     this.state = {
-      error: ''
-    }
+      error: '',
+    };
   }
 
   loginWithGoogle() {
@@ -25,8 +25,8 @@ class Login extends Component {
 
     firebase.login({
       provider: 'google',
-      type: 'popup'
-    }).catch(error => {
+      type: 'popup',
+    }).catch((error) => {
       this.setState({ error: error.message });
     });
   }
@@ -36,8 +36,8 @@ class Login extends Component {
 
     firebase.login({
       provider: 'facebook',
-      type: 'popup'
-    }).catch(error => {
+      type: 'popup',
+    }).catch((error) => {
       this.setState({ error: error.message });
     });
   }
@@ -47,8 +47,8 @@ class Login extends Component {
 
     firebase.login({
       provider: 'twitter',
-      type: 'popup'
-    }).catch(error => {
+      type: 'popup',
+    }).catch((error) => {
       this.setState({ error: error.message });
     });
   }
@@ -58,8 +58,8 @@ class Login extends Component {
 
     firebase.login({
       email: val.email,
-      password: val.password
-    }).catch(error => {
+      password: val.password,
+    }).catch((error) => {
       switch (error.code) {
         case 'auth/user-not-found':
         case 'auth/wrong-password':
@@ -73,9 +73,15 @@ class Login extends Component {
   }
 
   render() {
-    const { submitFailed, emailErrors, passwordErrors } = this.props;
+    const {
+      submitFailed,
+      emailErrors,
+      passwordErrors,
+    } = this.props;
 
-    const isError = this.state.error || (submitFailed && (emailErrors.required || emailErrors.isEmail || passwordErrors.required ));
+    const isError = this.state.error || (submitFailed && (emailErrors.required ||
+                                                          emailErrors.isEmail ||
+                                                          passwordErrors.required));
     const firebaseErrorStyle = addStyle(this.state.error);
     const formErrorStyle = addStyle(isError);
     const emailRequiredErrorStyle = addStyle(submitFailed && emailErrors.required);
@@ -86,12 +92,20 @@ class Login extends Component {
       <div className="login">
         <h1>Login</h1>
 
-        <Form model="login"
-              onSubmit={(val) => this.handleSubmit(val)}
-              validators={{
-                email: { required, isEmail },
-                password: { required }
-              }}
+        <Form
+          model="login"
+          onSubmit={(val) => {
+            this.handleSubmit(val);
+          }}
+          validators={{
+            email: {
+              required,
+              isEmail,
+            },
+            password: {
+              required,
+            },
+          }}
         >
           <div style={formErrorStyle}>
             <h2>Error</h2>
@@ -101,35 +115,47 @@ class Login extends Component {
 
           <div>
             <label htmlFor="email">Email:</label>
-            <Control type='email' model='.email' />
+            <Control type="email" model=".email" />
             <div style={emailRequiredErrorStyle}>An email is required</div>
             <div style={isEmailErrorStyle}>Please provide a valid email address.</div>
           </div>
 
           <div>
             <label htmlFor="password">Password:</label>
-            <Control type='password' model='.password' />
+            <Control type="password" model=".password" />
             <div style={passwordRequiredErrorStyle}>Please provide a password</div>
           </div>
 
           <button>Submit</button>
         </Form>
 
-        <GoogleButton onClick={() => {
-          this.loginWithGoogle();
-        }} />
-
-        <img alt="Login with Facebook" src='/login-facebook.png'
-             onClick={() => {
-               this.loginWithFacebook();
-             }}
+        <GoogleButton
+          onClick={() => {
+            this.loginWithGoogle();
+          }}
         />
 
-        <img alt="Login with Twitter" src='/login-twitter.png'
-             onClick={() => {
-               this.loginWithTwitter();
-             }}
-        />
+        <button
+          onClick={() => {
+            this.loginWithFacebook();
+          }}
+        >
+          <img
+            alt="Login with Facebook"
+            src="/login-facebook.png"
+          />
+        </button>
+
+        <button
+          onClick={() => {
+            this.loginWithTwitter();
+          }}
+        >
+          <img
+            alt="Login with Twitter"
+            src="/login-twitter.png"
+          />
+        </button>
       </div>
     );
   }

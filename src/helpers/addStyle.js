@@ -1,9 +1,9 @@
 const displayBlock = {
-  display: 'block'
+  display: 'block',
 };
 
 const displayNone = {
-  display: 'none'
+  display: 'none',
 };
 
 const addStyle = ifStatement => (ifStatement ? displayBlock : displayNone);

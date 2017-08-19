@@ -1,35 +1,35 @@
 const initialCreateState = {
-  name: ''
+  name: '',
 };
 
 export const login = {
   email: '',
-  password: ''
+  password: '',
 };
 
 export const register = {
   email: '',
   password: '',
-  passwordConfirm: ''
+  passwordConfirm: '',
 };
 
 export const forgottenPassword = {
-  email: ''
+  email: '',
 };
 
 export const resetPassword = {
   password: '',
-  passwordConfirm: ''
+  passwordConfirm: '',
 };
 
 export const addLinkToMenu = {
   url: '',
-  text: ''
-}
+  text: '',
+};
 
 export const createPage = {
   name: '',
-  slug: ''
+  slug: '',
 };
 
 export const createMenu = initialCreateState;

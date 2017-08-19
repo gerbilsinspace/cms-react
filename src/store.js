@@ -13,28 +13,31 @@ const {
   FIREBASE_API_KEY,
   FIREBASE_AUTH_DOMAIN,
   FIREBASE_DATABASE_URL,
-  FIREBASE_STORAGE_BUCKET
+  FIREBASE_STORAGE_BUCKET,
 } = process.env;
 
 const firebaseConfig = {
   apiKey: FIREBASE_API_KEY,
   authDomain: FIREBASE_AUTH_DOMAIN,
   databaseURL: FIREBASE_DATABASE_URL,
-  storageBucket: FIREBASE_STORAGE_BUCKET
+  storageBucket: FIREBASE_STORAGE_BUCKET,
 };
 
 const rrfConfig = {
   userProfile: 'users',
-  menusProfile: 'menus'
+  menusProfile: 'menus',
 };
 
 firebase.initializeApp(firebaseConfig);
 
 const createStoreWithFirebase = compose(
   applyMiddleware(middleware),
-  reactReduxFirebase(firebase, rrfConfig)
+  reactReduxFirebase(firebase, rrfConfig),
 )(createStore);
 
-const store = createStoreWithFirebase(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+const store = createStoreWithFirebase(
+  reducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+);
 
 export default store;

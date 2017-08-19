@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { firebaseConnect } from 'react-redux-firebase';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 class Logout extends Component {
@@ -10,8 +8,8 @@ class Logout extends Component {
     this.logout = this.logout.bind(this);
 
     this.state = {
-      redirect: false
-    }
+      redirect: false,
+    };
   }
 
   logout() {
@@ -19,7 +17,7 @@ class Logout extends Component {
 
     firebase.logout().then(() => {
       this.setState({
-        redirect: true
+        redirect: true,
       });
     });
   }
@@ -27,27 +25,22 @@ class Logout extends Component {
   render() {
     if (this.state.redirect) {
       return (
-        <Redirect to='/login' />
+        <Redirect to="/login" />
       );
     }
 
 
     return (
       <div className="logout">
-        <button onClick={() => {
-          this.logout();
-        }}>Logout</button>
+        <button
+          onClick={() => {
+            this.logout();
+          }}
+        >Logout</button>
       </div>
     );
   }
 }
 
-const mapStateToProps = state => {
-  return {};
-};
-
-export default compose(
-  firebaseConnect(),
-  connect(mapStateToProps)
-)(Logout);
+export default firebaseConnect()(Logout);
 

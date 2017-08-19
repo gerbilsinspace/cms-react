@@ -1,0 +1,19 @@
+{
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "node": true,
+    "jest": true,
+  },
+  "extends": "airbnb",
+  "rules": {
+    "react/jsx-filename-extension": "off",
+    "import/prefer-default-export": "off",
+    "no-bitwise": "off",
+    "react/prop-types": "off",
+    "react/prefer-stateless-function": "off",
+    "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
+    "no-param-reassign": "off",
+    "no-underscore-dangle": "off"
+  }
+}

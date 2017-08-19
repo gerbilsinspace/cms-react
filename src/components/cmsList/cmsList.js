@@ -14,19 +14,24 @@ const CMSList = ({
   itemNameLowercasePlural,
   itemNameUppercase,
   itemNameUppercasePlural,
-  itemFirebaseUrl
+  itemFirebaseUrl,
 }) => {
-  const itemList = !isLoaded(items) ? 'Loading' :
-                     isEmpty(items) ? `Please create a new ${itemNameLowercase}` :
-                       Object.keys(items).map((key, id) => {
-    return (
-      <CMSListItem key={key}
-                   name={items[id].name}
-                   itemKey={items[id].key}
-                   type={itemNameLowercasePlural}
+  let itemList;
+
+  if (!isLoaded(items)) {
+    itemList = 'Loading';
+  } else if (isEmpty(items)) {
+    itemList = `Please create a new ${itemNameLowercase}`;
+  } else {
+    itemList = Object.keys(items).map((key, id) => (
+      <CMSListItem
+        key={key}
+        name={items[id].name}
+        itemKey={items[id].key}
+        type={itemNameLowercasePlural}
       />
-    );
-  });
+    ));
+  }
 
   return (
     <CMSLayout>
@@ -35,12 +40,13 @@ const CMSList = ({
 
         <div>
           <h2>Create {itemNameUppercase}</h2>
-          <CreateContentForm firebase={firebase}
-                             clearAction={clearItemAction}
-                             itemUrl={itemFirebaseUrl}
-                             submitFailed={submitFailed}
-                             nameErrors={nameErrors}
-                             itemName={itemNameUppercase}
+          <CreateContentForm
+            firebase={firebase}
+            clearAction={clearItemAction}
+            itemUrl={itemFirebaseUrl}
+            submitFailed={submitFailed}
+            nameErrors={nameErrors}
+            itemName={itemNameUppercase}
           />
         </div>
 

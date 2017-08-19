@@ -15,23 +15,31 @@ class ForgottenPassword extends Component {
 
     this.state = {
       error: '',
-      success: false
-    }
+      success: false,
+    };
   }
 
   handleSubmit(val) {
     const { firebase } = this.props;
     firebase.auth().sendPasswordResetEmail(val.email).then(() => {
-      this.setState({success: true});
-    }).catch(err => {
-      this.setState({error: err.message});
+      this.setState({
+        success: true,
+      });
+    }).catch((err) => {
+      this.setState({
+        error: err.message,
+      });
     });
   }
 
   render() {
     const { submitFailed, emailErrors } = this.props;
 
-    const isError = this.state.error || (submitFailed && (emailErrors.required || emailErrors.isEmail));
+    const isError = this.state.error ||
+      (submitFailed &&
+       (emailErrors.required ||
+        emailErrors.isEmail)
+      );
     const firebaseErrorStyle = addStyle(this.state.error);
     const formErrorStyle = addStyle(isError);
     const emailRequiredErrorStyle = addStyle(submitFailed && emailErrors.isEmail);
@@ -42,11 +50,15 @@ class ForgottenPassword extends Component {
       <div className="forgotten-password">
         <h1>Forgotten Password</h1>
 
-        <Form model="forgottenPassword"
-              onSubmit={val => this.handleSubmit(val)}
-              validators={{
-                email: { required, isEmail }
-              }}
+        <Form
+          model="forgottenPassword"
+          onSubmit={val => this.handleSubmit(val)}
+          validators={{
+            email: {
+              required,
+              isEmail,
+            },
+          }}
         >
           <div style={formErrorStyle}>
             <h2>Error</h2>
@@ -55,8 +67,8 @@ class ForgottenPassword extends Component {
           </div>
 
           <div>
-            <label htmlFor='email'>Email:</label>
-            <Control type='email' model='.email' />
+            <label htmlFor="email">Email:</label>
+            <Control type="email" model=".email" />
             <div style={emailRequiredErrorStyle}>An email is required</div>
             <div style={isEmailErrorStyle}>Please provide a valid email adddress</div>
           </div>
@@ -73,11 +85,11 @@ class ForgottenPassword extends Component {
 const mapStateToProps = state => ({
   submitFailed: state.forms.forgottenPassword.$form.submitFailed,
   formErrors: state.forms.forgottenPassword.$form.errors,
-  emailErrors: state.forms.forgottenPassword.email.errors
+  emailErrors: state.forms.forgottenPassword.email.errors,
 });
 
 export default compose(
   firebaseConnect(),
-  connect(mapStateToProps)
+  connect(mapStateToProps),
 )(ForgottenPassword);
 

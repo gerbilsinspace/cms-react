@@ -10,36 +10,37 @@ const Templates = ({
   nameErrors,
   items,
   firebase,
-  clearItemAction
+  clearItemAction,
 }) => (
-  <CMSList items={items}
-           submitFailed={submitFailed}
-           nameErrors={nameErrors}
-           firebase={firebase}
-           clearItemAction={clearItemAction}
-           itemNameLowercase='template'
-           itemNameLowercasePlural='templates'
-           itemNameUppercase='Template'
-           itemNameUppercasePlural='Templates'
-           itemFirebaseUrl='/templates'
+  <CMSList
+    items={items}
+    submitFailed={submitFailed}
+    nameErrors={nameErrors}
+    firebase={firebase}
+    clearItemAction={clearItemAction}
+    itemNameLowercase="template"
+    itemNameLowercasePlural="templates"
+    itemNameUppercase="Template"
+    itemNameUppercasePlural="Templates"
+    itemFirebaseUrl="/templates"
   />
 );
 
 const mapStateToProps = state => ({
   items: state.firebase.ordered.templates,
   submitFailed: state.forms.createTemplate.$form.submitFailed,
-  nameErrors: state.forms.createTemplate.name.errors
+  nameErrors: state.forms.createTemplate.name.errors,
 });
 
 const mapDispatchToProps = dispatch => ({
   clearItemAction: () => {
     dispatch(actions.change('createTemplate.name', ''));
-  }
+  },
 });
 
 export default compose(
   firebaseConnect([
-    '/templates#orderByChild=name'
+    '/templates#orderByChild=name',
   ]),
-  connect(mapStateToProps, mapDispatchToProps)
+  connect(mapStateToProps, mapDispatchToProps),
 )(Templates);

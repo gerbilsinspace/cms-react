@@ -16,8 +16,9 @@ const rootReducer = combineReducers({
     addLinkToMenu: models.addLinkToMenu,
     createTemplate: models.createTemplate,
     createPage: models.createPage,
-    createPartial: models.createPartial
-  })
+    createPartial: models.createPartial,
+  }),
 });
 
 export default rootReducer;
+

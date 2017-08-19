@@ -4,7 +4,7 @@ import { compose } from 'redux';
 import { firebaseConnect } from 'react-redux-firebase';
 import {
   Route,
-  Redirect
+  Redirect,
 } from 'react-router-dom';
 
 const ProtectedRoute = ({
@@ -13,41 +13,48 @@ const ProtectedRoute = ({
   userKeyLength,
   ...rest
 }) => (
-  <Route {...rest} render={props => {
-    if (rest.profile.isEmpty) { // if user has no valid account
-      return (
-        <Redirect to={{
-          pathname: '/login',
-          state: { from: props.location }
-        }}/>
-      )
-    }
-
-    if (!role) { // first time user has logged in, has no role set.
-      if (userKeyLength === 1) {
-        rest.firebase.updateProfile({
-          role: 'owner'
-        });
-      } else if (userKeyLength > 1) {
-        rest.firebase.updateProfile({
-          role: 'unauthorised'
-        });
+  <Route
+    {...rest}
+    render={(props) => {
+      if (rest.profile.isEmpty) { // if user has no valid account
+        return (
+          <Redirect
+            to={{
+              pathname: '/login',
+              state: { from: props.location },
+            }}
+          />
+        );
       }
-    }
 
-    if (role === 'unauthorised') { // if admin hasn't given user edit rights
+      if (!role) { // first time user has logged in, has no role set.
+        if (userKeyLength === 1) {
+          rest.firebase.updateProfile({
+            role: 'owner',
+          });
+        } else if (userKeyLength > 1) {
+          rest.firebase.updateProfile({
+            role: 'unauthorised',
+          });
+        }
+      }
+
+      if (role === 'unauthorised') { // if admin hasn't given user edit rights
+        return (
+          <Redirect
+            to={{
+              pathname: '/unauthorised',
+              state: { from: props.location },
+            }}
+          />
+        );
+      }
+
       return (
-        <Redirect to={{
-          pathname: '/unauthorised',
-          state: { from: props.location }
-        }} />
+        <Component {...props} />
       );
-    }
-
-    return (
-      <Component {...props} />
-    );
-  }} />
+    }}
+  />
 );
 
 const mapStateToProps = (state) => {
@@ -59,14 +66,14 @@ const mapStateToProps = (state) => {
 
   return {
     profile: state.firebase.profile,
-    userKeyLength: userKeyLength,
-    role: state.firebase.profile.role
+    userKeyLength,
+    role: state.firebase.profile.role,
   };
-}
+};
 
 export default compose(
   firebaseConnect([
-    'users'
+    'users',
   ]),
-  connect(mapStateToProps)
+  connect(mapStateToProps),
 )(ProtectedRoute);

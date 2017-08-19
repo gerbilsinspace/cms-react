@@ -5,21 +5,21 @@ import { firebaseConnect } from 'react-redux-firebase';
 import Editor, { Editable, createEmptyState } from 'ory-editor-core';
 import { Trash, DisplayModeToggle, Toolbar } from 'ory-editor-ui';
 import slate from 'ory-editor-plugins-slate';
-import { contentPlugins, layoutPlugins } from '../../helpers/editorConfig.js';
+import { contentPlugins, layoutPlugins } from '../../helpers/editorConfig';
 
 require('react-tap-event-plugin')();
 
 const plugins = {
   content: contentPlugins,
-  layout: layoutPlugins
+  layout: layoutPlugins,
 };
 
-let content = createEmptyState();
+const content = createEmptyState();
 
 const editor = new Editor({
   plugins,
   defaultPlugin: slate(),
-  editables: [content]
+  editables: [content],
 });
 
 class Page extends Component {
@@ -28,26 +28,11 @@ class Page extends Component {
 
     this.state = {
       editorState: {},
-      pageId: ''
+      pageId: '',
     };
 
     this.onUpdate = this.onUpdate.bind(this);
     this.onSave = this.onSave.bind(this);
-  }
-
-  onUpdate(state) {
-    this.setState({
-      id: state.pageId,
-      editorState: state
-    });
-  }
-
-  onSave(state) {
-    const { firebase, pageId } = this.props;
-
-    firebase.update(`/pages/${pageId}/`, {
-      'editorState': JSON.stringify(state.editorState)
-    });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -63,41 +48,58 @@ class Page extends Component {
     }
   }
 
+  onUpdate(state) {
+    this.setState({
+      id: state.pageId,
+      editorState: state,
+    });
+  }
+
+  onSave(state) {
+    const { firebase, pageId } = this.props;
+
+    firebase.update(`/pages/${pageId}/`, {
+      editorState: JSON.stringify(state.editorState),
+    });
+  }
+
   render() {
     return (
       <div>
         <div className="editorHeader">
           <h1>Editing
-            <button onClick={() => {
-              this.onSave(this.state);
-            }}>Save</button>
+            <button
+              onClick={() => {
+                this.onSave(this.state);
+              }}
+            >Save</button>
           </h1>
         </div>
         <Editable editor={editor} id={content.id} onChange={this.onUpdate} />
-        <Trash editor={editor}/>
-        <DisplayModeToggle editor={editor}/>
-        <Toolbar editor={editor}/>
+        <Trash editor={editor} />
+        <DisplayModeToggle editor={editor} />
+        <Toolbar editor={editor} />
       </div>
     );
   }
-};
+}
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   let page = null;
   const pageId = state.router.location.pathname.replace('/cms/pages/', '');
 
   if (state.firebase.data.pages) {
-    page = state.firebase.data.pages[pageId]
+    page = state.firebase.data.pages[pageId];
   }
 
   return {
     page,
-    pageId
+    pageId,
   };
 };
 
 export default compose(
   firebaseConnect(['pages']),
-  connect(mapStateToProps)
+  connect(mapStateToProps),
 )(Page);
 

@@ -17,7 +17,7 @@ class CMSPages extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
 
     this.state = {
-      error: ''
+      error: '',
     };
   }
 
@@ -26,7 +26,10 @@ class CMSPages extends Component {
 
     if (!names) return true;
 
-    for (const name in names) {
+    const nameLength = Object.keys(names).length;
+    for (let i = 0; i < nameLength; i++) {
+      const name = names[i];
+
       if (name === val) return false;
     }
 
@@ -38,7 +41,11 @@ class CMSPages extends Component {
 
     if (!slugs) return true;
 
-    for (const slug in slugs) {
+    const slugLength = Object.keys(slugs).length;
+
+    for (let i = 0; i < slugLength; i++) {
+      const slug = slugs[i];
+
       if (slug === val) return false;
     }
 
@@ -49,11 +56,11 @@ class CMSPages extends Component {
     const { firebase, clearAction, itemUrl } = this.props;
 
     firebase.push(itemUrl, {
-      'name': name,
-      'slug': slug
-    }).catch(err => {
+      name,
+      slug,
+    }).catch((err) => {
       this.setState({
-        error: err.message
+        error: err.message,
       });
     });
     clearAction();
@@ -61,7 +68,13 @@ class CMSPages extends Component {
 
   render() {
     const { submitFailed, nameErrors, slugErrors, items } = this.props;
-    const isError = this.state.error || (submitFailed && (nameErrors.required || nameErrors.uniqueName ||  slugErrors.required || slugErrors.uniqueSlug));
+    const isError = this.state.error ||
+      (submitFailed &&
+       (nameErrors.required ||
+        nameErrors.uniqueName ||
+        slugErrors.required ||
+        slugErrors.uniqueSlug)
+      );
     const firebaseErrorStyle = addStyle(this.state.error);
     const formErrorStyle = addStyle(isError);
     const nameRequiredStyle = addStyle(submitFailed && nameErrors.required);
@@ -69,13 +82,22 @@ class CMSPages extends Component {
     const slugRequiredStyle = addStyle(submitFailed && slugErrors.required);
     const uniqueSlugStyle = addStyle(submitFailed && slugErrors.uniqueSlug);
 
-    const itemList = !isLoaded(items) ? 'Loading' : isEmpty(items) ? 'Please create a new page' : Object.keys(items).map((key, id) => (
-      <CMSListItem key={key}
-                   name={items[id].name}
-                   itemKey={items[id].key}
-                   type='pages'
-      />
-    ));
+    let itemList;
+
+    if (!isLoaded(items)) {
+      itemList = 'Loading';
+    } else if (isEmpty(items)) {
+      itemList = 'Please create a new page';
+    } else {
+      itemList = Object.keys(items).map((key, id) => (
+        <CMSListItem
+          key={key}
+          name={items[id].name}
+          itemKey={items[id].key}
+          type="pages"
+        />
+      ));
+    }
 
     return (
       <CMSLayout>
@@ -85,18 +107,21 @@ class CMSPages extends Component {
           <div>
             <h2>Create Page</h2>
             <div>
-              <Form model='createPage'
-                    onSubmit={val => {this.handleSubmit(val)}}
-                    validators={{
-                      name: {
-                        required,
-                        uniqueName: this.uniqueName
-                      },
-                      slug: {
-                        required,
-                        uniqueSlug: this.uniqueSlug
-                      }
-                    }}
+              <Form
+                model="createPage"
+                onSubmit={(val) => {
+                  this.handleSubmit(val);
+                }}
+                validators={{
+                  name: {
+                    required,
+                    uniqueName: this.uniqueName,
+                  },
+                  slug: {
+                    required,
+                    uniqueSlug: this.uniqueSlug,
+                  },
+                }}
               >
                 <div style={formErrorStyle}>
                   <h2>Error</h2>
@@ -105,15 +130,15 @@ class CMSPages extends Component {
                 </div>
 
                 <div>
-                  <label htmlFor='name'>Name:</label>
-                  <Control type='text' model='.name' />
+                  <label htmlFor="name">Name:</label>
+                  <Control type="text" model=".name" />
                   <div style={nameRequiredStyle}>Please provide a name</div>
                   <div style={uniqueNameStyle}>Please provide a unique name</div>
                 </div>
 
                 <div>
-                  <label htmlFor='slug'>Slug:</label>
-                  <Control type='text' model='.slug' />
+                  <label htmlFor="slug">Slug:</label>
+                  <Control type="text" model=".slug" />
                   <div style={slugRequiredStyle}>Please provide a slug</div>
                   <div style={uniqueSlugStyle}>Please provide a unique slug</div>
                 </div>
@@ -131,25 +156,26 @@ class CMSPages extends Component {
       </CMSLayout>
     );
   }
-};
+}
 
 const mapStateToProps = state => ({
   items: state.firebase.ordered.pages,
   submitFailed: state.forms.createPage.$form.submitFailed,
   nameErrors: state.forms.createPage.name.errors,
-  slugErrors: state.forms.createPage.slug.errors
+  slugErrors: state.forms.createPage.slug.errors,
 });
 
 const mapDispatchToProps = dispatch => ({
   clearAction: () => {
     dispatch(actions.change('createPage.name', ''));
     dispatch(actions.change('createPage.slug', ''));
-  }
+  },
 });
 
 export default compose(
   firebaseConnect([
-    '/pages#orderByChild=name'
+    '/pages#orderByChild=name',
   ]),
-  connect(mapStateToProps, mapDispatchToProps)
+  connect(mapStateToProps, mapDispatchToProps),
 )(CMSPages);
+

@@ -14,7 +14,7 @@ const Loading = ({ profile, children }) => {
 };
 
 const mapStateToProps = state => ({
-  profile: state.firebase.profile
+  profile: state.firebase.profile,
 });
 
 export default connect(mapStateToProps)(Loading);

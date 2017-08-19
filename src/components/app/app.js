@@ -8,11 +8,11 @@ import Loading from '../loading';
 
 const App = () => (
   <Provider store={store}>
-    <Loading children={
+    <Loading>
       <ConnectedRouter history={history}>
         <Router />
       </ConnectedRouter>
-    } />
+    </Loading>
   </Provider>
 );
 

@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Partial = () => (
-  <div></div>
+  <div />
 );
 
 export default Partial;

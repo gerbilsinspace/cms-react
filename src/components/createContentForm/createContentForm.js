@@ -11,7 +11,7 @@ class CreateContentForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
 
     this.state = {
-      error: ''
+      error: '',
     };
   }
 
@@ -20,7 +20,11 @@ class CreateContentForm extends Component {
 
     if (!names) return true;
 
-    for (const name in names) {
+    const nameKeyLength = Object.keys(names).length;
+
+    for (let i = 0; i < nameKeyLength; i++) {
+      const name = names[nameKeyLength];
+
       if (name === val) return false;
     }
 
@@ -30,17 +34,24 @@ class CreateContentForm extends Component {
   handleSubmit({ name }) {
     const { firebase, clearAction, itemUrl } = this.props;
 
-    firebase.push(itemUrl, {'name': name}).catch(err => {
+    firebase.push(itemUrl, {
+      name,
+    }).catch((err) => {
       this.setState({
-        error: err.message
+        error: err.message,
       });
     });
+
     clearAction();
   }
 
   render() {
     const { submitFailed, nameErrors, itemName } = this.props;
-    const isError = this.state.error || (submitFailed && (nameErrors.required || nameErrors.uniqueName));
+    const isError = this.state.error ||
+      (submitFailed &&
+       (nameErrors.required ||
+        nameErrors.uniqueName)
+      );
     const firebaseErrorStyle = addStyle(this.state.error);
     const formErrorStyle = addStyle(isError);
     const nameRequiredStyle = addStyle(submitFailed && nameErrors.required);
@@ -48,14 +59,17 @@ class CreateContentForm extends Component {
 
     return (
       <div>
-        <Form model={`create${itemName}`}
-              onSubmit={val => {this.handleSubmit(val)}}
-              validators={{
-                name: {
-                  required,
-                  uniqueName: this.uniqueName
-                }
-              }}
+        <Form
+          model={`create${itemName}`}
+          onSubmit={(val) => {
+            this.handleSubmit(val);
+          }}
+          validators={{
+            name: {
+              required,
+              uniqueName: this.uniqueName,
+            },
+          }}
         >
           <div style={formErrorStyle}>
             <h2>Error</h2>
@@ -64,8 +78,8 @@ class CreateContentForm extends Component {
           </div>
 
           <div>
-            <label htmlFor='name'>Name:</label>
-            <Control type='text' model='.name' />
+            <label htmlFor="name">Name:</label>
+            <Control type="text" model=".name" />
             <div style={nameRequiredStyle}>Please provide a name</div>
             <div style={uniqueNameStyle}>Please provide a unique menu name</div>
           </div>
@@ -75,6 +89,6 @@ class CreateContentForm extends Component {
       </div>
     );
   }
-};
+}
 
 export default CreateContentForm;
