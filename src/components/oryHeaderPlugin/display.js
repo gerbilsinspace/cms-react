@@ -1,7 +1,9 @@
 import React from 'react';
 
 const Display = () => (
-  <div />
+  <div className="ory-header-component">
+    <div className="top-border" />
+  </div>
 );
 
 export default Display;

@@ -1,0 +1,10 @@
+.ory-header-component {
+  height: 50px;
+  background: #e0f2f1;
+}
+
+.ory-header-component .top-border {
+  border-top: 5px solid #90c5c2;
+  height: 3px;
+  background: #fff;
+}

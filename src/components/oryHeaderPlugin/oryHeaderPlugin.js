@@ -4,11 +4,10 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import Display from './display';
 import Form from './form';
-import type { PropTypes } from './index';
 
-const ORYHeaderPlugin = (props: PropTypes) => (
+const ORYHeaderPlugin = ({ readOnly, ...props }) => (
   <MuiThemeProvider muiTheme={getMuiTheme()}>
-    {props.readOnly ? <Display {...props} /> : <Form {...props} />}
+    {readOnly ? <Display {...props} /> : <Form {...props} />}
   </MuiThemeProvider>
 );
 
