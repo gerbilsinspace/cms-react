@@ -81,7 +81,6 @@ class CMSPages extends Component {
     const uniqueNameStyle = addStyle(submitFailed && nameErrors.uniqueName);
     const slugRequiredStyle = addStyle(submitFailed && slugErrors.required);
     const uniqueSlugStyle = addStyle(submitFailed && slugErrors.uniqueSlug);
-
     let itemList;
 
     if (!isLoaded(items)) {
@@ -92,7 +91,7 @@ class CMSPages extends Component {
       itemList = Object.keys(items).map((key, id) => (
         <CMSListItem
           key={key}
-          name={items[id].name}
+          name={items[id].value.name}
           itemKey={items[id].key}
           type="pages"
         />
@@ -160,6 +159,7 @@ class CMSPages extends Component {
 
 const mapStateToProps = state => ({
   items: state.firebase.ordered.pages,
+  itemUrl: '/pages',
   submitFailed: state.forms.createPage.$form.submitFailed,
   nameErrors: state.forms.createPage.name.errors,
   slugErrors: state.forms.createPage.slug.errors,
